@@ -1,0 +1,485 @@
+{
+	"info": {
+		"name": "FitPlanHub API",
+		"description": "Complete API collection for FitPlanHub fitness platform. Includes authentication, plans, subscriptions, and user management endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "User Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set('auth_token', jsonData.token);",
+									"        pm.environment.set('user_id', jsonData.user.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/signup",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "signup"]
+						},
+						"description": "Register a new user account. Roles can be 'user' or 'trainer'."
+					}
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set('auth_token', jsonData.token);",
+									"        pm.environment.set('user_id', jsonData.user.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						},
+						"description": "Authenticate user and receive JWT token."
+					}
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/profile",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "profile"]
+						},
+						"description": "Get authenticated user's profile information."
+					}
+				}
+			]
+		},
+		{
+			"name": "Fitness Plans",
+			"item": [
+				{
+					"name": "Get All Plans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/plans",
+							"host": ["{{base_url}}"],
+							"path": ["plans"]
+						},
+						"description": "Retrieve all available fitness plans with trainer information."
+					}
+				},
+				{
+					"name": "Get Plan by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/plans/1",
+							"host": ["{{base_url}}"],
+							"path": ["plans", "1"]
+						},
+						"description": "Get detailed information about a specific fitness plan."
+					}
+				},
+				{
+					"name": "Create Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"30-Day Weight Loss Program\",\n  \"description\": \"A comprehensive weight loss plan designed to help you lose weight safely and effectively over 30 days. Includes meal plans, workout routines, and progress tracking.\",\n  \"price\": 49.99,\n  \"duration\": 30\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/plans",
+							"host": ["{{base_url}}"],
+							"path": ["plans"]
+						},
+						"description": "Create a new fitness plan. Requires trainer authentication."
+					}
+				},
+				{
+					"name": "Update Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Plan Title\",\n  \"price\": 59.99\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/plans/1",
+							"host": ["{{base_url}}"],
+							"path": ["plans", "1"]
+						},
+						"description": "Update an existing fitness plan. Trainers can only update their own plans."
+					}
+				},
+				{
+					"name": "Delete Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/plans/1",
+							"host": ["{{base_url}}"],
+							"path": ["plans", "1"]
+						},
+						"description": "Delete a fitness plan. Trainers can only delete their own plans."
+					}
+				},
+				{
+					"name": "Get Trainer's Plans",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/plans/trainer/my-plans",
+							"host": ["{{base_url}}"],
+							"path": ["plans", "trainer", "my-plans"]
+						},
+						"description": "Get all plans created by the authenticated trainer."
+					}
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "Subscribe to Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"planId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/subscriptions",
+							"host": ["{{base_url}}"],
+							"path": ["subscriptions"]
+						},
+						"description": "Subscribe to a fitness plan. Users can only subscribe once per plan."
+					}
+				},
+				{
+					"name": "Get User Subscriptions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subscriptions/my-subscriptions",
+							"host": ["{{base_url}}"],
+							"path": ["subscriptions", "my-subscriptions"]
+						},
+						"description": "Get all plans the authenticated user has subscribed to."
+					}
+				},
+				{
+					"name": "Check Subscription",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/subscriptions/check?planId=1",
+							"host": ["{{base_url}}"],
+							"path": ["subscriptions", "check"],
+							"query": [
+								{
+									"key": "planId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Check if the authenticated user is subscribed to a specific plan."
+					}
+				}
+			]
+		},
+		{
+			"name": "Users & Trainers",
+			"item": [
+				{
+					"name": "Follow Trainer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"trainerId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/follow",
+							"host": ["{{base_url}}"],
+							"path": ["users", "follow"]
+						},
+						"description": "Follow a trainer. Users can follow multiple trainers."
+					}
+				},
+				{
+					"name": "Unfollow Trainer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"trainerId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/unfollow",
+							"host": ["{{base_url}}"],
+							"path": ["users", "unfollow"]
+						},
+						"description": "Unfollow a trainer."
+					}
+				},
+				{
+					"name": "Get Followed Trainers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/followed-trainers",
+							"host": ["{{base_url}}"],
+							"path": ["users", "followed-trainers"]
+						},
+						"description": "Get list of all trainers the authenticated user is following."
+					}
+				},
+				{
+					"name": "Get Trainer Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/trainer/2",
+							"host": ["{{base_url}}"],
+							"path": ["users", "trainer", "2"]
+						},
+						"description": "Get detailed information about a trainer including all their plans. Authentication is optional - if provided, includes whether user is following the trainer."
+					}
+				},
+				{
+					"name": "Get Personalized Feed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/feed",
+							"host": ["{{base_url}}"],
+							"path": ["users", "feed"]
+						},
+						"description": "Get personalized feed containing plans from followed trainers and purchased plans."
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000/api",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

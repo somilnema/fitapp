@@ -1,0 +1,144 @@
+.feed-page {
+  min-height: calc(100vh - 80px);
+  padding: 40px 0;
+}
+
+.feed-page h1 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.feed-subtitle {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.feed-card {
+  background: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feed-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.purchased-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #27ae60;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.followed-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #3498db;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.feed-card h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  padding-right: 100px;
+}
+
+.trainer-name {
+  color: #3498db;
+  display: block;
+  margin-bottom: 15px;
+  transition: color 0.3s;
+}
+
+.trainer-name:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.plan-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.duration {
+  color: #666;
+  font-weight: 500;
+}
+
+.plan-preview {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.view-plan-link {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  width: 100%;
+  text-align: center;
+}
+
+.view-plan-link:hover {
+  background-color: #2980b9;
+}
+
+.empty-feed {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-feed p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.browse-link {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.browse-link:hover {
+  background-color: #2980b9;
+}
+

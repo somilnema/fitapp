@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+.DS_Store
+
+# SQLite database files
+fitplanhub.db
+fitplanhub.db-journal
+fitplanhub.db-wal
+fitplanhub.db-shm
+

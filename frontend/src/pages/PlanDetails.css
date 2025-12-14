@@ -1,0 +1,154 @@
+.plan-details-page {
+  min-height: calc(100vh - 80px);
+  padding: 40px 0;
+}
+
+.back-btn {
+  background-color: #95a5a6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #7f8c8d;
+}
+
+.plan-details-card {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.plan-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.plan-header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.trainer-link {
+  color: #3498db;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.trainer-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.plan-info {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.price {
+  color: #27ae60;
+  font-size: 1.8rem;
+}
+
+.plan-description-full,
+.plan-description-preview {
+  margin-top: 30px;
+}
+
+.plan-description-full h2,
+.plan-description-preview h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.plan-description-full p {
+  line-height: 1.8;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.plan-description-preview {
+  text-align: center;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.plan-description-preview p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.subscribe-btn {
+  background-color: #27ae60;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.subscribe-btn:hover {
+  background-color: #229954;
+}
+
+.login-prompt {
+  margin-top: 20px;
+}
+
+.login-prompt p {
+  margin-bottom: 15px;
+}
+
+.login-link {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.login-link:hover {
+  background-color: #2980b9;
+}
+
+.subscribed-badge {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+}
+
